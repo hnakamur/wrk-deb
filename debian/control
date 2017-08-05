@@ -1,0 +1,25 @@
+Source: wrk
+Section: web
+Priority: optional
+Maintainer: Robert Edmonds <edmonds@debian.org>
+Build-Depends:
+ debhelper (>= 9~)
+ , libluajit-5.1-dev
+ , libssl-dev
+ , luajit
+ , pkg-config
+Standards-Version: 3.9.8
+Homepage: https://github.com/wg/wrk
+Vcs-Browser: https://anonscm.debian.org/cgit/collab-maint/wrk.git
+Vcs-Git: https://anonscm.debian.org/git/collab-maint/wrk.git
+
+Package: wrk
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: HTTP benchmarking tool
+ wrk is a modern HTTP benchmarking tool capable of generating significant
+ load when run on a single multi-core CPU. It combines a multithreaded
+ design with scalable event notification systems such as epoll and kqueue.
+ .
+ An optional LuaJIT script can perform HTTP request generation, response
+ processing, and custom reporting.

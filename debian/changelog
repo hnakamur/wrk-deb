@@ -1,0 +1,40 @@
+wrk (4.0.2-2) unstable; urgency=medium
+
+  [ Christos Trochalakis ]
+  * Modify previous mips FTBFS patch rendering wrk unusable in all
+    architectures. Thanks to Rinat Ibragimov (Closes: #855118)
+  * Fix build on mips architectures (Closes: #801881)
+
+ -- Robert Edmonds <edmonds@debian.org>  Sat, 05 Aug 2017 16:04:19 -0400
+
+wrk (4.0.2-1) unstable; urgency=medium
+
+  [ Robert Edmonds ]
+  * New upstream version 4.0.2
+  * .gitattributes: Ignore /deps
+  * debian/gbp.conf: Use repack/* for upstream-tag
+  * debian/rules: Build against system luajit, openssl
+  * debian/rules: Attempt to fix FTBFS on powerpc
+  * debian/rules: Set VER to Debian package version when calling make
+  * debian/gbp.conf: Add [dch] section
+  * debian/gbp.conf: Set debian-branch in [DEFAULT] section
+  * debian/control: Standards-Version 3.9.8 (no changes)
+  * debian/control: Secure Vcs-Git URI
+  * debian/copyright: Remove stanzas for deps/ files
+
+  [ Jurica Stanojkovic ]
+  * Fix FTBFS on mips, mipsel
+
+ -- Robert Edmonds <edmonds@debian.org>  Sun, 02 Oct 2016 20:16:03 -0400
+
+wrk (4.0.1-2) unstable; urgency=medium
+
+  * Fix overlinking.
+
+ -- Robert Edmonds <edmonds@debian.org>  Thu, 16 Apr 2015 20:48:23 -0400
+
+wrk (4.0.1-1) unstable; urgency=medium
+
+  * Initial release. (Closes: #782670)
+
+ -- Robert Edmonds <edmonds@debian.org>  Wed, 15 Apr 2015 17:54:34 -0400
