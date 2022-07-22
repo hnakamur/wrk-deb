@@ -8,28 +8,21 @@ Debian patch.
 
 For full commit history and separated commits, see the packaging Git
 repository.
---- wrk-4.1.0.orig/Makefile
-+++ wrk-4.1.0/Makefile
-@@ -1,5 +1,6 @@
+--- wrk-4.2.0.orig/Makefile
++++ wrk-4.2.0/Makefile
+@@ -1,5 +1,11 @@
 +PKG_CONFIG ?= pkg-config
  CFLAGS  += -std=c99 -Wall -O2 -D_REENTRANT
--LIBS    := -lpthread -lm -lssl -lcrypto
-+LIBS    += -lpthread -lm -lssl -lcrypto
- 
- TARGET  := $(shell uname -s | tr '[A-Z]' '[a-z]' 2>/dev/null || echo unknown)
- 
-@@ -17,6 +18,11 @@ else ifeq ($(TARGET), freebsd)
- 	LDFLAGS += -Wl,-E
- endif
- 
+-LIBS    := -lm -lssl -lcrypto -lpthread
++LIBS    += -lm -lssl -lcrypto -lpthread
++
 +CFLAGS   += $(shell $(PKG_CONFIG) --cflags luajit)
 +LIBS     += $(shell $(PKG_CONFIG) --libs luajit)
 +
 +CFLAGS   += $(CPPFLAGS)
-+
- SRC  := wrk.c net.c ssl.c aprintf.c stats.c script.c units.c \
- 		ae.c zmalloc.c http_parser.c
- BIN  := wrk
+ 
+ TARGET  := $(shell uname -s | tr '[A-Z]' '[a-z]' 2>/dev/null || echo unknown)
+ 
 @@ -51,8 +57,7 @@ clean:
  	$(RM) -rf $(BIN) obj/*
  
@@ -43,10 +36,10 @@ repository.
 @@ -60,15 +65,13 @@ $(ODIR):
  	@mkdir -p $@
  
- $(ODIR)/bytecode.o: src/wrk.lua
+ $(ODIR)/bytecode.c: src/wrk.lua $(DEPS)
 -	@echo LUAJIT $<
--	@$(SHELL) -c 'PATH=obj/bin:$(PATH) luajit -b $(CURDIR)/$< $(CURDIR)/$@'
-+	$(SHELL) -c 'PATH=obj/bin:$(PATH) luajit -b $(CURDIR)/$< $(CURDIR)/$@'
+-	@$(SHELL) -c 'PATH="obj/bin:$(PATH)" luajit -b "$(CURDIR)/$<" "$(CURDIR)/$@"'
++	$(SHELL) -c 'PATH="obj/bin:$(PATH)" luajit -b "$(CURDIR)/$<" "$(CURDIR)/$@"'
  
  $(ODIR)/version.o:
  	@echo 'const char *VERSION="$(VER)";' | $(CC) -xc -c -o $@ -
