@@ -1,3 +1,9 @@
+wrk (4.2.0-1ppa1~ubuntu20.04) focal; urgency=medium
+
+  * Change debian-branch in debian/gbp.conf
+
+ -- Hiroaki Nakamura <hnakamur@gmail.com>  Fri, 22 Jul 2022 14:56:28 +0900
+
 wrk (4.2.0-1ppa1~ubuntu18.04) bionic; urgency=medium
 
   * New upstream version 4.2.0
